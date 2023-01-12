@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use app\Http\Controllers\PostController;
+use App\Models\Advertisement;
+use Illuminate\Support\Facades\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/','index');
+
+Route::get('/newadvertisement', function() {
+    return view('newadvertisement');
+});
+
+Route::post('/newadvertisement', function() {
+    $advertisement = new Advertisement;
+    $advertisement->name = request('name');
+    $advertisement->description = request('description');
+    $advertisement->save();
 });
